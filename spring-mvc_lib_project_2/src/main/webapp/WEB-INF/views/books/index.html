@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All books</title>
+</head>
+<body>
+
+<div th:each="book : ${books.content}">
+    <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getTitle()
+    + ', ' + book.getAuthor() + ', ' + book.getReleaseDate()}">
+    </a>
+</div>
+
+<hr>
+
+<a href="/books/new">
+    <button>
+        Create Book
+    </button>
+</a>
+
+<div>
+    <a th:if="${books.hasPrevious()}" th:href="@{/books(page=${books.number - 1}, books_per_page=${books.size})}">Previous</a>
+    <a th:if="${books.hasNext()}" th:href="@{/books(page=${books.number + 1}, books_per_page=${books.size})}">Next</a>
+</div>
+</body>
+</html>
