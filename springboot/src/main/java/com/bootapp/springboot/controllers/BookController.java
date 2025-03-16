@@ -1,9 +1,10 @@
-package org.alishev.course.controller;
+package com.bootapp.springboot.controllers;
 
-import org.alishev.course.model.Book;
-import org.alishev.course.model.Person;
-import org.alishev.course.services.BookService;
-import org.alishev.course.services.PersonService;
+import com.bootapp.springboot.models.Book;
+import com.bootapp.springboot.models.Person;
+import com.bootapp.springboot.services.BookService;
+import com.bootapp.springboot.services.PersonService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -108,7 +108,7 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    public String searchForm() {
+    public String searchForm(Model model) {
         return "books/search";
     }
 

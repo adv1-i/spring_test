@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${'Person with id = ' + person.getId()}"></title>
+
+  <style>
+    .expired {
+      color: red;
+    }
+    .valid {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+<p th:text="${person.getId()}"></p>
+<p th:text="${person.getName()}"></p>
+<p th:text="${person.getBirthDate()}"></p>
+
+<div th:if="${book.isEmpty()}">
+  <p>The person hasn't picked up any books yet</p>
+  <hr/>
+</div>
+
+
+<div th:if="${!book.isEmpty()}">
+  <hr/>
+  <b>Books:</b>
+  <br/>
+  <ul>
+    <li th:each="book : ${book}" th:classappend="${book.isExpired()} ? 'expired' : 'valid'">
+      <span th:text="${book.getTitle()} + ' by ' + ${book.getAuthor()} + ', ' + ${book.getReleaseDate()}">Book Title by Author, Release Date</span>
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+
+
+
+<hr/>
+
+<a th:href="@{/people/{id}/edit(id=${person.getId()})}">
+  <button>
+    Edit Person
+  </button>
+</a>
+
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+  <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>
